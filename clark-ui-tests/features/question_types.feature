@@ -1,7 +1,7 @@
 @Question_types
 Feature: Question Types Form
 @AWS
-Scenario: Basic Questions
+Scenario: Basic Questions (minus dates)
 	Then I install the ccz app at "question_types.ccz"
 	Then I login with username "user_with_no_data" and password "123"
 	Then I press start
@@ -24,19 +24,6 @@ Scenario: Basic Questions
 	Then Next
 	Then Prev
 	Then I see the text "1.23456789E9"
-	Then Next
-
-	#Date
-	Then I enter date "2016,01,01" into the date widget
-	Then I see the text "Jan"
-	Then Next
-	
-	#Time
-	#
-	Then Next
-
-	#Date and Time
-	#Need to look into how to control this widget
 	Then Next
 
 	#Multi-select

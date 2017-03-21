@@ -1,11 +1,3 @@
-Then (/^I enter my name$/) do
-  keyboard_enter_text("Will")
-end
-
-Then (/^I enter test$/) do
-  keyboard_enter_text("test")
-end
-
 Then (/^I close the keyboard$/) do
   hide_soft_keyboard()
 end
@@ -44,7 +36,7 @@ end
 
 Then (/^I sync, without waiting for completion$/) do
   sleep 1
-  if current_activity() != "CommCareHomeActivity"
+  if current_activity() != "StandardHomeActivity"
     step("I go back to the home screen")
   end
   tap_when_element_exists("* {text CONTAINS[c] 'Sync with Server'}")
@@ -71,10 +63,12 @@ end
 
 Then (/^I rotate to portrait$/) do
   perform_action('set_activity_orientation', 'portrait')
+  step("I wait for 5 seconds")
 end
 
 Then (/^I rotate to landscape/) do
   perform_action('set_activity_orientation', 'landscape')
+  step("I wait for 5 seconds")
 end
 
 Then (/^I update the app$/) do

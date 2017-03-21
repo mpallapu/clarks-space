@@ -1,11 +1,17 @@
 Then (/^I select "([^\"]*)" menu item$/) do |entry|
+  sleep 2
   press_menu_button()
+  sleep 2
   touch("* {text CONTAINS[c] '#{entry}'}")
 end
 
 Then (/^I press start$/) do
-  wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 15)
-  touch("android.support.v7.widget.CardView index:0")
+  while true
+    hide_soft_keyboard()
+    break if element_exists("* id:'screen_suite_menu_list'")
+    wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 15)
+    touch("android.support.v7.widget.CardView index:0")
+  end
 end
 
 Then (/^I open incomplete forms$/) do
@@ -29,7 +35,7 @@ Then (/^I save form as incomplete$/) do
 end
 
 Then (/^I logout/) do
-  if current_activity() != "CommCareHomeActivity"
+  if current_activity() != "StandardHomeActivity"
     step("I go back to the home screen")
   end
   while true
@@ -50,7 +56,7 @@ Then (/^I exit form entry$/) do
 end
 
 Then (/^I go back to the home screen$/) do
-  while current_activity() != "CommCareHomeActivity"
+  while current_activity() != "StandardHomeActivity"
     press_back_button
 
     if element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
@@ -64,8 +70,8 @@ Then (/^I go back to the home screen$/) do
   end
 end
 
-Then (/^I go to Saved Forms/) do
-  if current_activity() != "CommCareHomeActivity"
+Then (/^I go to Saved Forms$/) do
+  if current_activity() != "StandardHomeActivity"
     step("I go back to the home screen")
   end
   while true
@@ -74,6 +80,20 @@ Then (/^I go to Saved Forms/) do
   end
   tap_when_element_exists("* {text CONTAINS[c] 'Saved'}")
   wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
+end
+
+Then (/^I go to back to Server Settings$/) do
+  while true
+    hide_soft_keyboard()
+    break if element_exists("* {text CONTAINS[c] 'CommCare > Server Settings'}")
+    if element_exists("* {text CONTAINS[c] 'OK'}")
+      touch("* {text CONTAINS[c] 'OK'}")
+    end
+    if element_exists("* {text CONTAINS[c] 'Cancel'}")
+      touch("* {text CONTAINS[c] 'Cancel'}")
+    end
+    sleep 1
+  end
 end
 
 # ----------------------------
