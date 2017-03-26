@@ -1,6 +1,6 @@
 @Question_types
 Feature: Question Types Form
-@AWS
+
 Scenario: Basic Questions (minus dates)
 	Then I install the ccz app at "question_types.ccz"
 	Then I login with username "user_with_no_data" and password "123"
@@ -130,3 +130,4 @@ Scenario: Basic Questions (minus dates)
 	Then I check that the "Three" item in the single-select list is selected
 	Then I check that the "Two" item in the single-select list is not selected
 	Then Next
+

@@ -180,3 +180,11 @@ Then (/^I test a signature widget question$/) do
   step("I press button with text \"Save and Close\"")
 end
 
+# COMBOBOX WIDGET
+Then (/^I select the combobox text field$/) do
+	touch('Combobox')
+end
+
+Then (/^I clear the combobox text field$/) do
+  clear_text_in("* org.commcare.views.Combobox")
+end
